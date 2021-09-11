@@ -5,6 +5,8 @@ This project was developed with [Redux Toolkit](https://redux-toolkit.js.org/) t
 
 [React router](https://reactrouter.com/web/example/sidebar) is used to handle the different flows needed in the Show me my money! dashboard and sidebar navigation.
 
+[React google charts](https://github.com/RakanNimer/react-google-charts) It is used for the pie chart presented in the dashboard.
+
 ## Available Scripts
 
 In the project directory, you can run:
