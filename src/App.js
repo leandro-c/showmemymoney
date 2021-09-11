@@ -6,8 +6,8 @@ import {
 	Link
 } from "react-router-dom";
 import { Counter } from './features/counter/Counter';
-import { ChakraProvider } from "@chakra-ui/react";
-
+import { ChakraProvider, Box, List, ListItem, Text, Stack } from "@chakra-ui/react";
+import CakeChart from './components/CakeChart'
 // Each logical "route" has two components, one for
 // the sidebar and one for the main area. We want to
 // render both of them in different places when the
@@ -21,23 +21,23 @@ const routes = [
 	{
 		path: "/",
 		exact: true,
-		sidebar: () => <div>home!</div>,
-		main: () => <h2>Home</h2>
+		sidebar: () => null,
+		main: () => <CakeChart/>
 	},
 	{
-		path: "/bubblegum",
-		sidebar: () => <div>bubblegum!</div>,
-		main: () => <h2>Bubblegum</h2>
+		path: "/cajadeahorro",
+		sidebar: () => null,
+		main: () => <h2>Caja de ahorro</h2>
 	},
 	{
-		path: "/shoelaces",
-		sidebar: () => <div>shoelaces!</div>,
-		main: () => <h2>Shoelaces</h2>
+		path: "/bonoa23",
+		sidebar: () => null,
+		main: () => <h2>Bono A23</h2>
 	},
 	{
-		path: "/counter",
-		sidebar: () => <div>counter!</div>,
-		main: () => <Counter/>
+		path: "/accionescocacola",
+		sidebar: () => null,
+		main: () => <Counter />
 	}
 ];
 
@@ -45,28 +45,60 @@ export default function App() {
 	return (
 		<ChakraProvider>
 			<Router>
-				<div style={{ display: "flex" }}>
-					<div
-						style={{
-							padding: "10px",
-							width: "40%",
-							background: "#f0f0f0"
-						}}
-					>
-						<ul style={{ listStyleType: "none", padding: 0 }}>
-							<li>
-								<Link to="/">Home</Link>
-							</li>
-							<li>
-								<Link to="/bubblegum">Bubblegum</Link>
-							</li>
-							<li>
-								<Link to="/shoelaces">Shoelaces</Link>
-							</li>
-							<li>
-								<Link to="/counter">Counter</Link>
-							</li>
-						</ul>
+				<Box d="flex">
+					<Box p="10"margin={2}>
+						<Box borderWidth="3px">
+							<Box>
+								<Text
+									fontWeight="bold"
+									textTransform="uppercase"
+									fontSize="lg"
+									letterSpacing="wide"
+									color="teal.600"
+									p="3"
+								>
+									Mis Inversiones
+								</Text>
+								<Box borderWidth="1px" />
+							</Box>
+							<List p="3" listStyleType="none">
+								<ListItem>
+									<Link to="/"></Link>
+								</ListItem>
+								<ListItem>
+									<Link to="/cajadeahorro">Caja de ahorro</Link>
+								</ListItem>
+								<ListItem>
+									<Link to="/bonoa23">Bono A23</Link>
+								</ListItem>
+								<ListItem>
+									<Link to="/accionescocacola">Acciones coca cola</Link>
+								</ListItem>
+							</List>
+						</Box>
+						<Box mt="50px" borderWidth="3px">
+							<Box>
+								<Text
+									fontWeight="bold"
+									textTransform="uppercase"
+									fontSize="lg"
+									letterSpacing="wide"
+									color="teal.600"
+									p="3"
+								>
+									Otras Inversiones
+								</Text>
+								<Box borderWidth="1px" />
+							</Box>
+							<List p="3" listStyleType="none">
+								<ListItem>
+									<Link to="/bonosa42">Bonos A42</Link>
+								</ListItem>
+								<ListItem>
+									<Link to="/accionesapple">Acciones Aplle</Link>
+								</ListItem>
+							</List>
+						</Box>
 
 						<Switch>
 							{routes.map((route, index) => (
@@ -85,9 +117,9 @@ export default function App() {
 								/>
 							))}
 						</Switch>
-					</div>
+					</Box>
 
-					<div style={{ flex: 1, padding: "10px" }}>
+					<Box d="flex" p="10">
 						<Switch>
 							{routes.map((route, index) => (
 								// Render more <Route>s with the same paths as
@@ -100,8 +132,8 @@ export default function App() {
 								/>
 							))}
 						</Switch>
-					</div>
-				</div>
+					</Box>
+				</Box>
 			</Router>
 		</ChakraProvider>
 	);
