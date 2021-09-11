@@ -1,58 +1,108 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from "react";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link
+} from "react-router-dom";
 import { Counter } from './features/counter/Counter';
-import './App.css';
+import { ChakraProvider } from "@chakra-ui/react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+// Each logical "route" has two components, one for
+// the sidebar and one for the main area. We want to
+// render both of them in different places when the
+// path matches the current URL.
+
+// We are going to use this route config in 2
+// spots: once for the sidebar and once in the main
+// content section. All routes are in the same
+// order they would appear in a <Switch>.
+const routes = [
+	{
+		path: "/",
+		exact: true,
+		sidebar: () => <div>home!</div>,
+		main: () => <h2>Home</h2>
+	},
+	{
+		path: "/bubblegum",
+		sidebar: () => <div>bubblegum!</div>,
+		main: () => <h2>Bubblegum</h2>
+	},
+	{
+		path: "/shoelaces",
+		sidebar: () => <div>shoelaces!</div>,
+		main: () => <h2>Shoelaces</h2>
+	},
+	{
+		path: "/counter",
+		sidebar: () => <div>counter!</div>,
+		main: () => <Counter/>
+	}
+];
+
+export default function App() {
+	return (
+		<ChakraProvider>
+			<Router>
+				<div style={{ display: "flex" }}>
+					<div
+						style={{
+							padding: "10px",
+							width: "40%",
+							background: "#f0f0f0"
+						}}
+					>
+						<ul style={{ listStyleType: "none", padding: 0 }}>
+							<li>
+								<Link to="/">Home</Link>
+							</li>
+							<li>
+								<Link to="/bubblegum">Bubblegum</Link>
+							</li>
+							<li>
+								<Link to="/shoelaces">Shoelaces</Link>
+							</li>
+							<li>
+								<Link to="/counter">Counter</Link>
+							</li>
+						</ul>
+
+						<Switch>
+							{routes.map((route, index) => (
+								// You can render a <Route> in as many places
+								// as you want in your app. It will render along
+								// with any other <Route>s that also match the URL.
+								// So, a sidebar or breadcrumbs or anything else
+								// that requires you to render multiple things
+								// in multiple places at the same URL is nothing
+								// more than multiple <Route>s.
+								<Route
+									key={index}
+									path={route.path}
+									exact={route.exact}
+									children={<route.sidebar />}
+								/>
+							))}
+						</Switch>
+					</div>
+
+					<div style={{ flex: 1, padding: "10px" }}>
+						<Switch>
+							{routes.map((route, index) => (
+								// Render more <Route>s with the same paths as
+								// above, but different components this time.
+								<Route
+									key={index}
+									path={route.path}
+									exact={route.exact}
+									children={<route.main />}
+								/>
+							))}
+						</Switch>
+					</div>
+				</div>
+			</Router>
+		</ChakraProvider>
+	);
 }
-
-export default App;
