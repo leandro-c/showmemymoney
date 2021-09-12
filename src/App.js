@@ -6,8 +6,9 @@ import {
 	Link
 } from "react-router-dom";
 import { Counter } from './features/counter/Counter';
-import { ChakraProvider, Box, List, ListItem, Text, Stack } from "@chakra-ui/react";
+import { ChakraProvider, Box, List, ListItem, Text } from "@chakra-ui/react";
 import CakeChart from './components/CakeChart'
+import OperationsInvesmets from "./components/OperationsInvesmets";
 // Each logical "route" has two components, one for
 // the sidebar and one for the main area. We want to
 // render both of them in different places when the
@@ -32,7 +33,7 @@ const routes = [
 	{
 		path: "/bonoa23",
 		sidebar: () => null,
-		main: () => <h2>Bono A23</h2>
+		main: () => <OperationsInvesmets/>
 	},
 	{
 		path: "/accionescocacola",
