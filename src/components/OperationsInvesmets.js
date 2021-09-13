@@ -33,6 +33,7 @@ const OperationsInvesmets = () => {
                     </List>
                 </Box>
                 <Box mt="50px" borderWidth="3px">
+                    <Box m="20px">
                     <InputGroup size="md">
                         <Input
                             pr="4.5rem"
@@ -45,9 +46,12 @@ const OperationsInvesmets = () => {
                             </Button>
                         </InputRightElement>
                     </InputGroup>
+                    </Box>
+                    
                 </Box>
 
                 <Box mt="50px" borderWidth="3px">
+                <Box m="20px">
                     <InputGroup size="md">
                         <Input
                             pr="4.5rem"
@@ -60,6 +64,7 @@ const OperationsInvesmets = () => {
                             </Button>
                         </InputRightElement>
                     </InputGroup>
+                    </Box>
                 </Box>
             </Box>
         </Box>

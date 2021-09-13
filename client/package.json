@@ -1,0 +1,15 @@
+{
+  "name": "restfulnode",
+  "version": "1.0.0",
+  "description": "node server for show me my money",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test "
+  },
+  "author": "Leandro Casarin",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
