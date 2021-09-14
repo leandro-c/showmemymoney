@@ -7,6 +7,15 @@ This project was developed with [Redux Toolkit](https://redux-toolkit.js.org/) t
 
 [React google charts](https://github.com/RakanNimer/react-google-charts) It is used for the pie chart presented in the dashboard.
 
+## Available Scripts for Backend
+
+In the project directory, you can run:
+
+### `node index.js`
+
+Runs the backend in the development mode.<br />
+Open [http://localhost:3003](http://localhost:3003)
+
 ## Available Scripts
 
 In the project directory, you can run:
