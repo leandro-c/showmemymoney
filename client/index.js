@@ -1,27 +1,19 @@
 const express = require('express')
 const usersController = require('./UserController')
 const assetsController = require('./AssetController')
-
+const { UserRepository } = require("./UserRepository");
+const { AssetRepository } = require("./AssetRepository");
 // app initialization
 const app = express()
 
-// need to have this for express to parse json...
-const bodyParser = require("body-parser");
-
-/* app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
-app.use(bodyParser.json()); */
-	
-// Parsers for POST data
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 app.use(express.json({limit: '20mb'}));
-
+const userRepository = new UserRepository();
+const assetRepository = new AssetRepository();
 
 // adds the CRUD services
-usersController(app)
-assetsController(app)
+usersController(app, assetRepository, userRepository)
+assetsController(app, assetRepository)
 
 
 const port = 3003

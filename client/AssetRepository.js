@@ -57,6 +57,15 @@
     delete(entityId) {
         delete this._repo[entityId]
     }
+
+    /**
+     * Returns the element for the given name
+     * @param {int} name
+     * @return {Asset}
+     */
+    getByName(name) {
+        return Object.values(this._repo).find(asset=>asset.name === name)
+    }
 }
 
 module.exports = { AssetRepository }

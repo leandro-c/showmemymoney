@@ -1,5 +1,3 @@
-const { UserRepository } = require("./UserRepository");
-const { UserValidator } = require("./UserValidator");
 const { User } = require("./User");
 
 /**
@@ -7,13 +5,12 @@ const { User } = require("./User");
  * adds the routing for user CRUD
  * @param app
  */
-module.exports = function (app) {
-    const repository = new UserRepository();
-    const validator = new UserValidator(repository)
+
+module.exports = function (app, assetRepository, userRepository) {
 
     app.get('/user', (req, res) => {
         // execute action
-        const response = repository.getAll()
+        const response = userRepository.getAll()
 
         // handle response
         res.send(response)
@@ -24,7 +21,7 @@ module.exports = function (app) {
         const id = req.params.id
 
         // execute action
-        const user = repository.get(id)
+        const user = userRepository.get(id)
 
         // handle response
         if (user) {
@@ -47,18 +44,11 @@ module.exports = function (app) {
             id: undefined
         })
 
-        // validates the request
-        const isValid = validator.validForCreate(newUser)
-
         // handle response
-        if (isValid) {
-            // execute action
-            const createdUser = repository.save(newUser)
+        const createdUser = userRepository.save(newUser)
 
-            res.send(createdUser)
-        } else {
-            res.status(400).send("Can't create two users with the same name")
-        }
+        res.send(createdUser)
+        
     })
 
     app.put('/user/', (req, res) => {
@@ -71,71 +61,53 @@ module.exports = function (app) {
             assets: payload.assets,
             id: payload.id
         })
-        // validates the request
-        const isValid = validator.validForUpdate(userToUpdate)
-        // hand response
-        if (isValid) {
-            // execute action
-            const createdUser = repository.update(userToUpdate)
-            res.send(createdUser)
-        } else {
-            res.status(404).send("Can't have two Users with the same name")
-        }
+
+        const createdUser = userRepository.update(userToUpdate)
+        res.send(createdUser)
+        
     })
     app.put('/user/:id/deposit', (req, res) => {
         // get body parameters
         const payload = req.body
-        // creates the user
-        const userToUpdate = new User({
-            cash: payload.cash,
-        })
-        // validates the request
-        const isValid = validator.validForUpdate(userToUpdate)
-        // hand response
-        if (isValid) {
-            // execute action
-            const createdUser = repository.update(userToUpdate)
-            res.send(createdUser)
-        } else {
-            res.status(404).send("Can't have two Users with the same name")
-        }
+        const user = userRepository.get(req.body.id)
+        user.cash += payload.cash
+
+        const createdUser = userRepository.update(user)
+        res.send(createdUser)
+    
     })
 
     app.put('/user/:id/buy', (req, res) => {
         // get body parameters
         const payload = req.body
-        // creates the user
-        const userToUpdate = new User({
-            assets: payload.assets,
-        })
-        // validates the request
-        const isValid = validator.validForUpdate(userToUpdate)
-        // hand response
-        if (isValid) {
-            // execute action
-            const createdUser = repository.update(userToUpdate)
-            res.send(createdUser)
-        } else {
-            res.status(404).send("Can't have two Users with the same name")
+        const user = userRepository.get(req.params.id)
+        if(user.assets[payload.nameAsset]){
+            user.assets[payload.nameAsset] = user.assets[payload.nameAsset] + payload.quantity
+        }else{
+            user.assets[payload.nameAsset] = payload.quantity   
         }
+        
+        const asset = assetRepository.getByName(payload.nameAsset)
+        user.cash = user.cash - payload.quantity * asset.price;
+
+        const createdUser = userRepository.update(user)
+        res.send(createdUser)
+        
     })
     app.put('/user/:id/sell', (req, res) => {
-        // get body parameters
         const payload = req.body
-        // creates the user
-        const userToUpdate = new User({
-            assets: payload.assets,
-        })
-        // validates the request
-        const isValid = validator.validForUpdate(userToUpdate)
-        // hand response
-        if (isValid) {
-            // execute action
-            const createdUser = repository.update(userToUpdate)
-            res.send(createdUser)
-        } else {
-            res.status(404).send("Can't have two Users with the same name")
+        const user = userRepository.get(req.params.id)
+        if(user.assets[payload.nameAsset]){
+            user.assets[payload.nameAsset] = user.assets[payload.nameAsset] - payload.quantity
+        }else{
+            throw new Error()
         }
+        
+        const asset = assetRepository.getByName(payload.nameAsset)
+        user.cash = user.cash + payload.quantity * asset.price;
+
+        const createdUser = userRepository.update(user)
+        res.send(createdUser)
     })
 
     app.delete('/user/:id', (req, res) => {
@@ -143,7 +115,7 @@ module.exports = function (app) {
         const id = req.params.id
 
         // execute action
-        repository.delete(id)
+        userRepository.delete(id)
 
         res.status(204).send()
     })

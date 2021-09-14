@@ -1,5 +1,3 @@
-const { AssetRepository } = require("./AssetRepository");
-const { AssetValidator } = require("./AssetValidator");
 const { Asset } = require("./Asset");
 
 /**
@@ -7,13 +5,11 @@ const { Asset } = require("./Asset");
  * adds the routing for Asset CRUD
  * @param app
  */
-module.exports = function(app) {
-    const repository = new AssetRepository();
-    const validator = new AssetValidator(repository)
+module.exports = function(app, assetRepository) {
 
     app.get('/asset', (req, res) => {
         // execute action
-        const response = repository.getAll()
+        const response = assetRepository.getAll()
 
         // handle response
         res.send(response)
@@ -24,7 +20,7 @@ module.exports = function(app) {
         const id = req.params.id
 
         // execute action
-        const asset = repository.get(id)
+        const asset = assetRepository.get(id)
 
         // handle response
         if (asset) {
@@ -46,18 +42,9 @@ module.exports = function(app) {
             id: undefined
         })
 
-        // validates the request
-        const isValid = validator.validForCreate(newAsset)
-
-        // handle response
-        if (isValid) {
-            // execute action
-            const createdAsset = repository.save(newAsset)
-
-            res.send(createdAsset)
-        } else {
-            res.status(400).send("Can't create two assets with the same name")
-        }
+        const createdAsset = assetRepository.save(newAsset)
+        res.send(createdAsset)
+        
     })
 
     app.put('/asset', (req, res) => {
@@ -71,18 +58,9 @@ module.exports = function(app) {
             id: payload.id
         })
 
-        // validates the request
-        const isValid = validator.validForUpdate(assetToUpdate)
+        const createdAsset = assetRepository.update(assetToUpdate)
 
-        // hand response
-        if (isValid) {
-            // execute action
-            const createdAsset = repository.update(assetToUpdate)
-
-            res.send(createdAsset)
-        } else {
-            res.status(404).send("Can't have two assets with the same name")
-        }
+        res.send(createdAsset)
     })
 
     app.delete('/asset/:id', (req, res) => {
@@ -90,7 +68,7 @@ module.exports = function(app) {
         const id = req.params.id
 
         // execute action
-        repository.delete(id)
+        assetRepository.delete(id)
 
         res.status(204).send()
     })
