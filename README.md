@@ -16,7 +16,7 @@ In the project directory, you can run:
 Runs the backend in the development mode.<br />
 Open [http://localhost:3003](http://localhost:3003)
 
-## Available Scripts
+## Available Scripts for Frontend
 
 In the project directory, you can run:
 
