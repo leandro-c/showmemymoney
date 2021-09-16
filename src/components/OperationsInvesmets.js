@@ -1,4 +1,4 @@
-import React, { /* useState, */ useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { InputGroup, Input, InputRightElement, Button, Box, List, ListItem, Text } from "@chakra-ui/react";
 //Redux acctions
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,7 +6,6 @@ import { getUserReducer/* , userBuyAssetReducer, userDepositCashReducer, userSel
 
 const OperationsInvesmets = () => {
     const dispatch = useDispatch();
-    /* const [currentUser, setCurrentUser] = useState({}); */
     const userStatus = useSelector(state => state.user.status)
     const user = useSelector(state => state.user.user);
     useEffect(() => {
@@ -14,7 +13,7 @@ const OperationsInvesmets = () => {
             dispatch(getUserReducer())
         }
     }, [])
-    console.log('user',user)
+
     return (
         <Box d="flex">
             <Box p="10" margin={2}>

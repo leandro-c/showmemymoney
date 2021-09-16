@@ -46,19 +46,13 @@ export const userSlice = createSlice({
       [getUserReducer.pending]: (state, action) => {
           state.status = 'loading'
       },
-      [getUserReducer.fulfilled]: (state, action) => {
-          state.status = 'succeeded'
-          // Add any fetched posts to the array
-          state.posts = state.posts.concat(action.payload)
-      },
       [getUserReducer.rejected]: (state, action) => {
           state.status = 'failed'
           state.error = action.payload
       },
       [getUserReducer.fulfilled]: (state, action) => {  
         state.status = 'succeeded'
-        debugger
-          state.user=action.payload.data
+        state.user=action.payload.data
       },
   },
 });

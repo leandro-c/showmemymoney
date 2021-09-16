@@ -5,9 +5,12 @@ import {
 	Route,
 	Link
 } from "react-router-dom";
-import { ChakraProvider, Box, List, ListItem, Text } from "@chakra-ui/react";
+import { ChakraProvider, Box } from "@chakra-ui/react";
 import CakeChart from './components/CakeChart'
 import OperationsInvesmets from "./components/OperationsInvesmets";
+
+import MyInvestments from './components/MyInvestments'
+import OtherInvesments from './components/OtherInvesments'
 
 // Each logical "route" has two components, one for
 // the sidebar and one for the main area. We want to
@@ -49,56 +52,8 @@ export default function App() {
 			<Router>
 				<Box d="flex">
 					<Box p="10"margin={2}>
-						<Box borderWidth="3px">
-							<Box>
-								<Text
-									fontWeight="bold"
-									textTransform="uppercase"
-									fontSize="lg"
-									letterSpacing="wide"
-									color="teal.600"
-									p="3"
-								>
-									Mis Inversiones
-								</Text>
-								<Box borderWidth="1px" />
-							</Box>
-							<List p="3" listStyleType="none">
-								<ListItem>
-									<Link to="/">Caja de ahorro</Link>
-								</ListItem>
-								<ListItem>
-									<Link to="/bonoa23">Bono A23</Link>
-								</ListItem>
-								<ListItem>
-									<Link to="/accionescocacola">Acciones coca cola</Link>
-								</ListItem>
-							</List>
-						</Box>
-						<Box mt="50px" borderWidth="3px">
-							<Box>
-								<Text
-									fontWeight="bold"
-									textTransform="uppercase"
-									fontSize="lg"
-									letterSpacing="wide"
-									color="teal.600"
-									p="3"
-								>
-									Otras Inversiones
-								</Text>
-								<Box borderWidth="1px" />
-							</Box>
-							<List p="3" listStyleType="none">
-								<ListItem>
-									<Link to="/bonosa42">Bonos A42</Link>
-								</ListItem>
-								<ListItem>
-									<Link to="/accionesapple">Acciones Aplle</Link>
-								</ListItem>
-							</List>
-						</Box>
-
+						<MyInvestments />
+						<OtherInvesments/>
 						<Switch>
 							{routes.map((route, index) => (
 								// You can render a <Route> in as many places

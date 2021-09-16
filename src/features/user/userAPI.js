@@ -1,4 +1,4 @@
-import http from "./commonhttp";
+import http from "../commonhttp";
 export  function getUser() {
   /* en este caso voy a forzar a usar un solo usuario, 
   se que esta no es la implementacion correcta pero es con fines de hacer funcionar el frontend */
