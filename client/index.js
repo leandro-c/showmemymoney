@@ -3,8 +3,10 @@ const usersController = require('./UserController')
 const assetsController = require('./AssetController')
 const { UserRepository } = require("./UserRepository");
 const { AssetRepository } = require("./AssetRepository");
+var cors = require('cors')
 // app initialization
 const app = express()
+app.use(cors())
 
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 app.use(express.json({limit: '20mb'}));

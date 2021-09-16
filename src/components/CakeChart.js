@@ -4,17 +4,16 @@ const CakeChart = () => {
     return (
         <div>
             <Chart
-                width={'500px'}
-                height={'300px'}
+                width={'1000px'}
+                height={'600px'}
                 chartType="PieChart"
                 loader={<div>Loading Chart</div>}
                 data={[
-                    ['Task', 'Hours per Day'],
-                    ['Work', 11],
-                    ['Eat', 2],
-                    ['Commute', 2],
-                    ['Watch TV', 2],
-                    ['Sleep', 7],
+                    ['Assets', 'Values'],
+                    ['Acciones coca-cola', 31],
+                    ['Bonos A23', 11],
+                    ['Caja de ahorro', 2],
+                    ['Plazo fijo', 2]
                 ]}
                 options={{
                     title: 'Valor total de la cartera',

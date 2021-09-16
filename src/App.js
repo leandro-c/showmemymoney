@@ -5,10 +5,10 @@ import {
 	Route,
 	Link
 } from "react-router-dom";
-import { Counter } from './features/counter/Counter';
 import { ChakraProvider, Box, List, ListItem, Text } from "@chakra-ui/react";
 import CakeChart from './components/CakeChart'
 import OperationsInvesmets from "./components/OperationsInvesmets";
+
 // Each logical "route" has two components, one for
 // the sidebar and one for the main area. We want to
 // render both of them in different places when the
@@ -38,11 +38,12 @@ const routes = [
 	{
 		path: "/accionescocacola",
 		sidebar: () => null,
-		main: () => <Counter />
+		main: () => <OperationsInvesmets/>
 	}
 ];
 
 export default function App() {
+	
 	return (
 		<ChakraProvider>
 			<Router>
@@ -64,10 +65,7 @@ export default function App() {
 							</Box>
 							<List p="3" listStyleType="none">
 								<ListItem>
-									<Link to="/"></Link>
-								</ListItem>
-								<ListItem>
-									<Link to="/cajadeahorro">Caja de ahorro</Link>
+									<Link to="/">Caja de ahorro</Link>
 								</ListItem>
 								<ListItem>
 									<Link to="/bonoa23">Bono A23</Link>
