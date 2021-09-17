@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { Box, List, ListItem, Text } from "@chakra-ui/react";
+import { Box, List, ListItem, Text, Spinner } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { getAssetReducer } from '../features/asset/assetSlice'
-const OtherInvesments = () => {
 
+const OtherInvesments = () => {
     const dispatch = useDispatch();
     const assetStatus = useSelector(state => state.asset.status)
     const asset = useSelector(state => state.asset.asset);
@@ -12,8 +12,10 @@ const OtherInvesments = () => {
         if (assetStatus === 'idle') {
             dispatch(getAssetReducer())
         }
+        if (assetStatus === 'loading') {
+            return <Spinner size="xl" />
+        }
     }, [])
-    console.log(asset)
     return (
         <Box mt="50px" borderWidth="3px">
             <Box>
@@ -32,7 +34,7 @@ const OtherInvesments = () => {
             <List p="3" listStyleType="none">
                 {
                     asset && asset.map((e, i) => (
-                        <ListItem>
+                        <ListItem key={i}>
                             <Link key={i} to={`/${e.name}`}>{`${e.name}   ( AR$ ${e.price} / unidad )`}</Link>
                         </ListItem>
                     ))

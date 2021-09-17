@@ -4,7 +4,7 @@ import { InputGroup, Input, InputRightElement, Button, Box, List, ListItem, Text
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserReducer/* , userBuyAssetReducer, userDepositCashReducer, userSellAssetReducer */ } from '../features/user/userSlice'
 
-const OperationsInvesmets = () => {
+const OperationsInvesmets = ({name}) => {
     const dispatch = useDispatch();
     const userStatus = useSelector(state => state.user.status)
     const user = useSelector(state => state.user.user);
@@ -28,7 +28,6 @@ const OperationsInvesmets = () => {
                             p="3"
                         >
                             Valores
-                            <pre>{JSON.stringify(user)}</pre>
                         </Text>
                         <Box borderWidth="1px" />
                     </Box>

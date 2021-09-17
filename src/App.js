@@ -29,17 +29,17 @@ const routes = [
 		main: () => <CakeChart/>
 	},
 	{
-		path: "/cajadeahorro",
-		sidebar: () => null,
-		main: () => <h2>Caja de ahorro</h2>
-	},
-	{
-		path: "/bonoa23",
+		path: "/apple",
 		sidebar: () => null,
 		main: () => <OperationsInvesmets/>
 	},
 	{
-		path: "/accionescocacola",
+		path: "/ypf",
+		sidebar: () => null,
+		main: () => <OperationsInvesmets/>
+	},
+	{
+		path: "/A32",
 		sidebar: () => null,
 		main: () => <OperationsInvesmets/>
 	}

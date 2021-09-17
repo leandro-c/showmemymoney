@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getAssets } from './assetAPI';
 
 const initialState = {
-    asset: {},
+    asset: [],
     status: 'idle',
     error: null
 };
@@ -25,11 +25,10 @@ export const AssetSlice = createSlice({
         },
         [getAssetReducer.rejected]: (state, action) => {
             state.status = 'failed'
-            state.error = action.payload
+            state.error = action.payload.status
         },
         [getAssetReducer.fulfilled]: (state, action) => {
             state.status = 'succeeded'
-            debugger
             state.asset = action.payload.data
         },
     },
