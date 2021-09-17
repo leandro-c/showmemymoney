@@ -2,15 +2,17 @@ import React, {  useEffect } from 'react';
 import { InputGroup, Input, InputRightElement, Button, Box, List, ListItem, Text } from "@chakra-ui/react";
 //Redux acctions
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserReducer/* , userBuyAssetReducer, userDepositCashReducer, userSellAssetReducer */ } from '../features/user/userSlice'
+import {  userBuyAssetReducer, userSellAssetReducer  } from '../features/user/userSlice'
+import { getAssetReducer, getAsseByIdtReducer } from '../features/asset/assetSlice'
 
 const OperationsInvesmets = ({name}) => {
     const dispatch = useDispatch();
-    const userStatus = useSelector(state => state.user.status)
-    const user = useSelector(state => state.user.user);
+    const assetStatus = useSelector(state => state.asset.status)
+    const asset = useSelector(state => state.asset.asset);
+
     useEffect(() => {
-        if (userStatus === 'idle') {
-            dispatch(getUserReducer())
+        if (assetStatus === 'idle') {
+            dispatch(getAsseByIdtReducer(1))
         }
     }, [])
 

@@ -47,7 +47,7 @@ const MyInvestments = () => {
             </Box>
             <List p="3" listStyleType="none">
                 <ListItem>
-                    {user !== null | user !== 'undefined' &&<Link to="/">{`Caja de ahorro (AR$ ${user.cash})`}</Link>}
+                    {user&&<Link to="/">{`Caja de ahorro (AR$ ${user.cash})`}</Link>}
                 </ListItem>
                 {renderAssets(user)}
             </List>
