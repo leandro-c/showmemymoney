@@ -14,7 +14,7 @@ const CakeChart = () => {
         }
     }, [])
     let data =[]
-    data =user.username?Object.keys(user["assets"]).map((key) => [key, user["assets"][key]]):[];
+    data =user.username?[['Assets', 'Values']].concat(Object.keys(user["assets"]).map((key) => [key, user["assets"][key]])):[];
     console.log(data)
     return (
         <div>
@@ -23,13 +23,7 @@ const CakeChart = () => {
                 height={'600px'}
                 chartType="PieChart"
                 loader={<div>Loading Chart</div>}
-                data={[
-                    ['Assets', 'Values'],
-                    ['Acciones coca-cola', 31],
-                    ['Bonos A23', 11],
-                    ['Caja de ahorro', 2],
-                    ['Plazo fijo', 2]
-                ]}
+                data={data}
                 options={{
                     title: 'Valor total de la cartera',
                 }}
